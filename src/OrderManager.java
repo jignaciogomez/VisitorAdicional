@@ -13,12 +13,15 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.Line;
 import javax.swing.text.DefaultCaret;
 
-//public class OrderManager extends JFrame {
+public class OrderManager extends JFrame {
 
     public static final String newline = "\n";
     public static final String GET_TOTAL = "Get Total";
     public static final String CREATE_ORDER = "Create Order";
 
+    
+    
+    
     public static final String CHANGE_ORDER = "Update/Delete Order";
 
     public static final String EXIT = "Exit";
