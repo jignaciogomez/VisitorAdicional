@@ -67,9 +67,7 @@ public class OrderManager extends JFrame {
         lblId = new JLabel("Order Id:");
         lblOrderType = new JLabel("Order Type:");
         lblOrderAmount = new JLabel("Order Amount:");
-
         paneldinamico = new JPanel();
-
         lblTotal = new JLabel("Result:");
         lblTotalValue = new JLabel("Click Create or GetTotal Button");
 
@@ -196,16 +194,13 @@ public class OrderManager extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 12;
         gridbag.setConstraints(scrollPane, gbc);
-        gbc.insets.left = 2;
-        gbc.insets.right = 2;
-        gbc.insets.top = 40;
 
         //****************************************************
         //Add the buttons and the log to the frame
         Container contentPane = getContentPane();//
 
         contentPane.add(buttonPanel, BorderLayout.NORTH);
-        contentPane.add(panel, BorderLayout.CENTER);//
+        contentPane.add(panel, BorderLayout.CENTER);
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
             SwingUtilities.updateComponentTreeUI(
@@ -213,7 +208,6 @@ public class OrderManager extends JFrame {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-
     }
 
     public JTextArea getTaOrdenes() {
@@ -248,7 +242,7 @@ public class OrderManager extends JFrame {
                 System.exit(0);}}
         );
         
-        frame.setSize(600, 720);
+        frame.setSize(400, 520);
         frame.setVisible(true);
     }
 
