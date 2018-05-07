@@ -30,7 +30,7 @@ public class OverseasBuilder extends UIBuilder {
         nuevoPanel = new JPanel();
 
         lblAdditionalSH = new JLabel("Additional SH:  ");
-        txtAdditionalSH = new JTextField(15);
+        txtAdditionalSH = new JTextField(10);
         
         GridBagLayout gridbag = new GridBagLayout();
         nuevoPanel.setLayout(gridbag);

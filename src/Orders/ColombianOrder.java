@@ -2,23 +2,23 @@ package Orders;
 
 public class ColombianOrder extends Order {
   private double orderAmount;
-  private double spainTax; 
+  private double IvaTax; 
   private double total;
   
   public ColombianOrder() {
   }
   public ColombianOrder(double inp_orderAmount,
-      double inp_SpainTax, int numOrder) {
+      double inp_IvaTax, int numOrder) {
     orderAmount = inp_orderAmount;
-    spainTax = inp_SpainTax;
+    IvaTax = inp_IvaTax;
     num= numOrder;
     tipo="Colombian";
   }
   public double getOrderAmount() {
     return this.orderAmount;
   }
-  public double getSpainTax() {
-    return this.spainTax;
+  public double getIvaTax() {
+    return this.IvaTax;
   }
   @Override
   public void setTotal(double totalValue) {
@@ -34,7 +34,7 @@ public class ColombianOrder extends Order {
   }
   @Override
   public double obtenerTotal(){
-    System.out.println("El total de esta orden de tipo Spain es "+orderAmount+" + "+spainTax+" = "+(orderAmount+spainTax));
+    System.out.println("El total de esta orden de tipo Colombia es "+orderAmount+" + "+ IvaTax+" = "+(orderAmount+IvaTax));
     //return orderAmount+additionalTax;
     return this.total; 
   }  

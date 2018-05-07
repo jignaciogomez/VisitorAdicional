@@ -24,14 +24,11 @@ class ComboBoxHandler implements ItemListener {
             Object item = event.getItem();
             String tipo = manager.getOrderType();
 
-            System.out.println("tipo:" + tipo + ".");
-
             BuiderFactory factory = new BuiderFactory();
             builder = factory.getUIBuilder(tipo);
             UIDirector director = new UIDirector(builder);   
             
             director.build();
-            //get the final build object
             JPanel UIObj = builder.getNuevoPanel();
             manager.MostarNuevaUI(UIObj);
         }

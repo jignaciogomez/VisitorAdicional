@@ -24,13 +24,17 @@ public class CaliforniaBuilder extends UIBuilder {
 
     public CaliforniaBuilder() {
     }
+    
+    public String getAdditionalTax() {
+        return txtAdditionalTax.getText();
+    }
 
     public void AgregarNuevosControles() {
 
         nuevoPanel = new JPanel();
 
         lblAdditionalTax = new JLabel("Additional Tax:  ");
-        txtAdditionalTax = new JTextField(15);
+        txtAdditionalTax = new JTextField(10);
         
         GridBagLayout gridbag = new GridBagLayout();
         nuevoPanel.setLayout(gridbag);
@@ -51,4 +55,6 @@ public class CaliforniaBuilder extends UIBuilder {
         gridbag.setConstraints(txtAdditionalTax, gbc);
 
     }
+    
+    
 }

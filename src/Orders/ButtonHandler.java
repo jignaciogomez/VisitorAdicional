@@ -15,7 +15,8 @@ import java.awt.event.ActionListener;
 class ButtonHandler implements ActionListener {
 
     OrderManager objOrderManager;
-    static int num = 0;
+    static int numOrder = 0;
+    UIBuilder builder;
 
     public void actionPerformed(ActionEvent e) {
         String totalResult = null;
@@ -23,64 +24,43 @@ class ButtonHandler implements ActionListener {
         if (e.getActionCommand().equals(OrderManager.EXIT)) {           
             System.exit(1);
         }
-        if (e.getActionCommand().equals(OrderManager.CLEAR)) {
-            System.out.println("clear");
-            //reproducir("cartoon048.wav");
+        if (e.getActionCommand().equals(OrderManager.CLEAR)) {            
             objOrderManager.clear();
         }
         if (e.getActionCommand().equals(OrderManager.CREATE_ORDER) || e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
-            //get input values
             String orderType = objOrderManager.getOrderType();///
             String strOrderAmount = objOrderManager.getOrderAmount();
 
             double dblOrderAmount = 0.0;
-            double dblTax = 0.0;
-            double dblSH = 0.0;
-            double dblIVATax = 0.0;
 
-//            if (strOrderAmount.trim().length() == 0) {
-//                strOrderAmount = "0.0";
-//            }
-//            if (strTax.trim().length() == 0) {
-//                strTax = "0.0";
-//            }
-//            if (strSH.trim().length() == 0) {
-//                strSH = "0.0";
-//            }
-//            if (strIVATax.trim().length() == 0) {
-//                strIVATax = "0.0";
-//            }
+            if (strOrderAmount.trim().length() == 0) {
+                strOrderAmount = "0.0";
+            }
 
             dblOrderAmount = Double.parseDouble(strOrderAmount);
-//            dblTax = new Double(strTax).doubleValue();
-//            dblSH = new Double(strSH).doubleValue();///
-//            dblIVATax = new Double(strIVATax).doubleValue();///
 
             ////Get the Visitor  
             OrderVisitor visitor = objOrderManager.getOrderVisitor();//
 
             if (e.getActionCommand().equals(OrderManager.CREATE_ORDER)) {
                 ////Create the order
-                Order order = createOrder(orderType, dblOrderAmount, dblTax, dblSH, dblIVATax);///            
+                Order order = createOrder(orderType, dblOrderAmount);///            
 
                 //// accept the visitor instance
                 order.accept(visitor);//
 
-                objOrderManager.setTotalValue(" Order Created Successfully");
-                //objOrderManager.setMaxValue(" .");
+                objOrderManager.setTotalValue("Orden Creada con el Id: " + String.valueOf(numOrder));
             }
 
             if (e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
-                String strId = objOrderManager.getId();//se obtiene el Id del objeto que se va a modificar
-                System.out.println("se va a modificar la orden con id " + strId);
+                String strId = objOrderManager.getId();
                 if (strId.trim().length() == 0) {
                     strId = "0";
                 }
-                Order newOrder = createOrder(orderType, dblOrderAmount, dblTax, dblSH, dblIVATax);///  
+                Order newOrder = createOrder(orderType, dblOrderAmount);///  
                 
                 //Order order = visitor.specificOrder(strId, visitor,orderType );  
-                System.out.println("Se ha creado una orden de tipo " + orderType + ". " + newOrder.getClass().toString());
-                boolean updated = newOrder.aceptarModificacion(visitor, Integer.parseInt(strId));//  
+                 boolean updated = newOrder.aceptarModificacion(visitor, Integer.parseInt(strId));//  
 
                 if (updated) {
                     objOrderManager.setTotalValue(" The list was updated.");
@@ -88,8 +68,6 @@ class ButtonHandler implements ActionListener {
                     objOrderManager.setTotalValue(" The order was not found.");
                 }
             }
-            //objOrderManager.setOrdenes(visitor.obtenerOrdenes());
-            //objOrderManager.getTaOrdenes().setCaretPosition(objOrderManager.getTaOrdenes().getDocument().getLength() - 1);
         }
 
         if (e.getActionCommand().equals(OrderManager.GET_TOTAL)) {
@@ -102,24 +80,27 @@ class ButtonHandler implements ActionListener {
         }
     }
 
-    public Order createOrder(String orderType,
-            double orderAmount, double tax, double SH, double IVATax) {
+    public Order createOrder(String orderType, double orderAmount) {
 
         if (orderType.equalsIgnoreCase(OrderManager.CA_ORDER)) {  
-            num++;
-            return new CaliforniaOrder(orderAmount, tax, num);
+            numOrder++;     
+            //String tax = CaliforniaBuilder.getAdditionalTax();tax
+            int tax =0;
+            return new CaliforniaOrder(orderAmount, tax, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.NON_CA_ORDER)) {
-            num++;
-            return new NonCaliforniaOrder(orderAmount, num);
+            numOrder++;
+            return new NonCaliforniaOrder(orderAmount, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.OVERSEAS_ORDER)) {
-            num++;
-            return new OverseasOrder(orderAmount, SH, num);
+            numOrder++;
+            int SH = 0;
+            return new OverseasOrder(orderAmount, SH, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.COL_ORDER)) {
-            num++;
-            return new ColombianOrder(orderAmount, IVATax, num);
+            numOrder++;
+            int IVATax = 0;
+            return new ColombianOrder(orderAmount, IVATax, numOrder);
         }
 
         return null;

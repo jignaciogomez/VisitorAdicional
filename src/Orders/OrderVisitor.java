@@ -15,7 +15,6 @@ class OrderVisitor implements VisitorInterface{
   }
   public void visit(NonCaliforniaOrder inp_order) {
     inp_order.setTotal(inp_order.getOrderAmount());
-    //orderTotal = orderTotal + inp_order.getOrderAmount();
     ordeObjVector.add(inp_order); 
   }
   public void visit(CaliforniaOrder inp_order) {
@@ -24,8 +23,7 @@ class OrderVisitor implements VisitorInterface{
       ordeObjVector.add(inp_order); 
   }
   public void visit(ColombianOrder inp_order) {
-      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getSpainTax());
-      //orderTotal = orderTotal + inp_order.getOrderAmount()+inp_order.getSpainTax();
+      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getIvaTax());
       ordeObjVector.add(inp_order); 
   }
   public void visit(OverseasOrder inp_order) {
@@ -96,7 +94,7 @@ class OrderVisitor implements VisitorInterface{
   }
   @Override
   public boolean visitarModificando(ColombianOrder inp_order, int num) { 
-      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getSpainTax());
+      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getIvaTax());
       for (int i=0;i<ordeObjVector.size();i++ ){
           Order order=(Order)ordeObjVector.get(i);
           if (order.getNum()==num){
@@ -145,19 +143,5 @@ class OrderVisitor implements VisitorInterface{
       return null;
   }
   
-  public double getMaximoVal() {
-    double mayor=0; 
-    
-    for (int i=0;i<ordeObjVector.size();i++){
-        Order order=(Order)ordeObjVector.get(i);
-        //Class tipo_orden=order.getClass();
-        //System.out.println("tipo de order:"+tipo_orden);
-        //orderTotal=orderTotal+order.obtenerTotal();
-        if (order.obtenerTotal()>mayor){
-            mayor=order.obtenerTotal();
-        }
-    }    
-    return mayor;
-  }
   
 }
