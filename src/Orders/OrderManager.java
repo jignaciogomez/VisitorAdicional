@@ -7,15 +7,12 @@ import com.sun.java.swing.plaf.windows.*;
 
 public class OrderManager extends JFrame {
 
-    public static final String newline = "\n";
     public static final String GET_TOTAL = "Get Total";
     public static final String CREATE_ORDER = "Create Order";
-
-    public static final String CHANGE_ORDER = "Update/Delete Order";
-
+    public static final String CHANGE_ORDER = "Update Order";
     public static final String EXIT = "Exit";
     public static final String CLEAR = "Clear";
-    
+
     public static final String EMPTY_ORDER = "";
     public static final String CA_ORDER = "California Order";
     public static final String COL_ORDER = "Colombian Order";
@@ -24,16 +21,9 @@ public class OrderManager extends JFrame {
 
     private JComboBox cmbOrderType;
     private JTextField txtOrderAmount, txtId;
-    private JLabel lblOrderType, lblOrderAmount;
-
-    private JLabel lblTotal, lblTotalValue;
-
-    private JLabel lblId;
+    private JLabel lblOrderType, lblOrderAmount, lblTotal, lblTotalValue, lblInfoBuscar, lblId;
 
     private OrderVisitor objVisitor;
-
-    private JTextArea taOrdenes;
-
     private JPanel paneldinamico;
     //ManyOrders ordenes;
 
@@ -43,107 +33,109 @@ public class OrderManager extends JFrame {
         //Create the visitor instance
         objVisitor = new OrderVisitor();
 
-        cmbOrderType = new JComboBox();
-        cmbOrderType.addItem(OrderManager.EMPTY_ORDER);
-        cmbOrderType.addItem(OrderManager.CA_ORDER);
-        cmbOrderType.addItem(OrderManager.NON_CA_ORDER);
-        cmbOrderType.addItem(OrderManager.OVERSEAS_ORDER);
-        cmbOrderType.addItem(OrderManager.COL_ORDER);
-
-        ComboBoxHandler cbhandler2 = new ComboBoxHandler(this);
-        cmbOrderType.addItemListener(cbhandler2);
-
-        taOrdenes = new JTextArea(15, 27);
-        taOrdenes.setEditable(false);
-        //DefaultCaret caret = (DefaultCaret)taOrdenes.getCaret();
-        //caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);    
-        JScrollPane scrollPane = new JScrollPane(taOrdenes);
-        //scrollPane.setBounds(10,60,780,500);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        txtOrderAmount = new JTextField(10);
-        txtId = new JTextField(10);
-
-        lblId = new JLabel("Order Id:");
-        lblOrderType = new JLabel("Order Type:");
-        lblOrderAmount = new JLabel("Order Amount:");
-        paneldinamico = new JPanel();
-        lblTotal = new JLabel("Result:");
-        lblTotalValue = new JLabel("Click Create or GetTotal Button");
-
-        //Create the open button
+        ///INI-PANEL DE BOTONES///
         JButton getTotalButton = new JButton(OrderManager.GET_TOTAL);
-        JButton changeOrderButton = new JButton(OrderManager.CHANGE_ORDER);
         getTotalButton.setMnemonic(KeyEvent.VK_G);
-        JButton createOrderButton = new JButton(OrderManager.CREATE_ORDER);
         getTotalButton.setMnemonic(KeyEvent.VK_C);
+
+        JButton createOrderButton = new JButton(OrderManager.CREATE_ORDER);
+
         JButton exitButton = new JButton(OrderManager.EXIT);
         exitButton.setMnemonic(KeyEvent.VK_X);
-        ButtonHandler objButtonHandler = new ButtonHandler(this);
+
         JButton clearButton = new JButton(OrderManager.CLEAR);
 
+        JButton changeOrderButton = new JButton(OrderManager.CHANGE_ORDER);
+
+        ButtonHandler objButtonHandler = new ButtonHandler(this);
         getTotalButton.addActionListener(objButtonHandler);
         createOrderButton.addActionListener(objButtonHandler);
+        exitButton.addActionListener(objButtonHandler);
+        clearButton.addActionListener(objButtonHandler);
         changeOrderButton.addActionListener(objButtonHandler);
-        exitButton.addActionListener(new ButtonHandler());
-        clearButton.addActionListener(new ButtonHandler(this));
 
         //For layout purposes, put the buttons in a separate panel
-        JPanel buttonPanel = new JPanel();
-
         JPanel panel = new JPanel();
+
         GridBagLayout gridbag2 = new GridBagLayout();
         panel.setLayout(gridbag2);
         GridBagConstraints gbc2 = new GridBagConstraints();
+
+        
+        //gbc2.insets.top = 50;
+        gbc2.insets.bottom = 20;
+        //gbc2.insets.left = 50;
+        //gbc2.insets.right = 50;
+        
         panel.add(getTotalButton);
         panel.add(createOrderButton);
-        //panel.add(changeOrderButton);
         panel.add(clearButton);
         panel.add(exitButton);
-        
+
         gbc2.anchor = GridBagConstraints.EAST;
         gbc2.gridx = 0;
         gbc2.gridy = 0;
         gridbag2.setConstraints(createOrderButton, gbc2);
-        
+
+        //inicio de K
         gbc2.gridx = 1;
         gbc2.gridy = 0;
         gridbag2.setConstraints(getTotalButton, gbc2);
-        
         gbc2.gridx = 3;
         gbc2.gridy = 0;
         gridbag2.setConstraints(exitButton, gbc2);
-        
+
         gbc2.gridx = 4;
         gbc2.gridy = 0;
         gridbag2.setConstraints(clearButton, gbc2);
+        ///FIN-PANEL DE BOTONES///
+
+        ///INI-PANEL SUPERIOR 
+        cmbOrderType = new JComboBox();
+        cmbOrderType.addItem(OrderManager.EMPTY_ORDER);
+        cmbOrderType.addItem(OrderManager.CA_ORDER);
+        cmbOrderType.addItem(OrderManager.COL_ORDER);
+        cmbOrderType.addItem(OrderManager.NON_CA_ORDER);
+        cmbOrderType.addItem(OrderManager.OVERSEAS_ORDER);
+
+        ComboBoxHandler cbhandler2 = new ComboBoxHandler(this);
+        cmbOrderType.addItemListener(cbhandler2);
+
+        txtOrderAmount = new JTextField(10);
+
+        lblOrderType = new JLabel("Order Type:");
+        lblOrderAmount = new JLabel("Order Amount:");
+        paneldinamico = new JPanel();
+        lblTotal = new JLabel("Result:");
+        lblTotalValue = new JLabel("Orders Total = 0.0");
 
         //****************************************************
+        JPanel buttonPanel = new JPanel();
         GridBagLayout gridbag = new GridBagLayout();
         buttonPanel.setLayout(gridbag);
         GridBagConstraints gbc = new GridBagConstraints();
 
         buttonPanel.add(lblOrderType);
         buttonPanel.add(cmbOrderType);
+
         buttonPanel.add(lblOrderAmount);
         buttonPanel.add(txtOrderAmount);
+
         buttonPanel.add(paneldinamico);
-        buttonPanel.add(txtId);
-        buttonPanel.add(changeOrderButton);
-        buttonPanel.add(lblId);
+
         buttonPanel.add(lblTotal);
         buttonPanel.add(lblTotalValue);
-        buttonPanel.add(scrollPane);       
 
         gbc.insets.top = 5;
         gbc.insets.bottom = 5;
         gbc.insets.left = 5;
         gbc.insets.right = 5;
+
         gbc.anchor = GridBagConstraints.EAST;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gridbag.setConstraints(lblOrderType, gbc);
-        
+
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -153,7 +145,7 @@ public class OrderManager extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gridbag.setConstraints(lblOrderAmount, gbc);
-        
+
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -165,42 +157,59 @@ public class OrderManager extends JFrame {
         gbc.gridheight = 2;
         gridbag.setConstraints(paneldinamico, gbc);
 
-        gbc.anchor = GridBagConstraints.WEST ;
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        gridbag.setConstraints(lblId, gbc);
-
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 1;
-        gbc.gridy = 7;
-        gridbag.setConstraints(txtId, gbc);
-
-        gbc.anchor = GridBagConstraints.EAST;
-        gbc.gridx = 1;
-        gbc.gridy = 8;
-        gridbag.setConstraints(changeOrderButton, gbc);
-
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 0;
-        gbc.gridy = 10;
+        gbc.gridy = 5;
         gridbag.setConstraints(lblTotal, gbc);
-        
+
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
-        gbc.gridy = 11;
+        gbc.gridy = 6;
         gridbag.setConstraints(lblTotalValue, gbc);
+        ///FIN-PANEL SUPERIOR 
 
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 1;
-        gbc.gridy = 12;
-        gridbag.setConstraints(scrollPane, gbc);
+        ///INI-PANEL CENTRAL --BUSCAR--
+        JPanel CenterPanel = new JPanel();
+        GridBagLayout gridbagC = new GridBagLayout();
+        CenterPanel.setLayout(gridbagC);
+        GridBagConstraints gbc3 = new GridBagConstraints();
 
+        lblId = new JLabel("ID order to find:");
+        lblInfoBuscar = new JLabel("Buscar:");
+        txtId = new JTextField(10);
+
+        CenterPanel.add(lblInfoBuscar);
+        CenterPanel.add(txtId);
+        CenterPanel.add(lblId);
+        CenterPanel.add(changeOrderButton);
+
+        gbc3.anchor = GridBagConstraints.WEST;
+        gbc3.gridx = 0;
+        gbc3.gridy = 0;
+        gridbagC.setConstraints(lblInfoBuscar, gbc3);
+
+        gbc3.anchor = GridBagConstraints.WEST;
+        gbc3.gridx = 0;
+        gbc3.gridy = 2;
+        gridbagC.setConstraints(lblId, gbc3);
+
+        gbc3.anchor = GridBagConstraints.WEST;
+        gbc3.gridx = 1;
+        gbc3.gridy = 2;
+        gridbagC.setConstraints(txtId, gbc3);
+
+        gbc3.anchor = GridBagConstraints.EAST;
+        gbc3.gridx = 1;
+        gbc3.gridy = 3;
+        gridbagC.setConstraints(changeOrderButton, gbc3);
+
+        ///FIN-- PANEL CENTRAL --BUSCAR--
         //****************************************************
         //Add the buttons and the log to the frame
-        Container contentPane = getContentPane();//
-
+        Container contentPane = getContentPane();
         contentPane.add(buttonPanel, BorderLayout.NORTH);
-        contentPane.add(panel, BorderLayout.CENTER);
+        contentPane.add(CenterPanel, BorderLayout.CENTER);
+        contentPane.add(panel, BorderLayout.SOUTH);
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
             SwingUtilities.updateComponentTreeUI(
@@ -208,14 +217,6 @@ public class OrderManager extends JFrame {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-    }
-
-    public JTextArea getTaOrdenes() {
-        return taOrdenes;
-    }
-
-    public void setOrdenes(String ordenes) {
-        taOrdenes.setText(ordenes);
     }
 
     public void clear() {
@@ -239,10 +240,12 @@ public class OrderManager extends JFrame {
 
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                System.exit(0);}}
+                System.exit(0);
+            }
+        }
         );
-        
-        frame.setSize(400, 520);
+
+        frame.setSize(400, 350);
         frame.setVisible(true);
     }
 
