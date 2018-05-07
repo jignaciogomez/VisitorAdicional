@@ -1,3 +1,5 @@
+package Orders;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,38 +17,39 @@ import javax.swing.JTextField;
  *
  * @author jigna
  */
-public class CaliforniaBuilder extends UIBuilder {
+public class ColBuilder extends UIBuilder {
 
-    private JLabel lblAdditionalTax;
-    private JTextField txtAdditionalTax;
+    private JLabel lblIVA;
+    private JTextField txtIVA;
 
-    public CaliforniaBuilder() {
+    public ColBuilder() {
     }
 
+    @Override
     public void AgregarNuevosControles() {
-
         nuevoPanel = new JPanel();
 
-        lblAdditionalTax = new JLabel("Additional Tax:  ");
-        txtAdditionalTax = new JTextField(15);
-        
+        lblIVA = new JLabel("Percent IVA :    ");
+        txtIVA = new JTextField(10);
+
         GridBagLayout gridbag = new GridBagLayout();
         nuevoPanel.setLayout(gridbag);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
 
-        nuevoPanel.add(lblAdditionalTax);
-        nuevoPanel.add(txtAdditionalTax);
+        nuevoPanel.add(lblIVA);
+        nuevoPanel.add(txtIVA);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gridbag.setConstraints(lblAdditionalTax, gbc);
+        gridbag.setConstraints(lblIVA, gbc);
 
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gridbag.setConstraints(txtAdditionalTax, gbc);
+        gridbag.setConstraints(txtIVA, gbc);
 
     }
+
 }

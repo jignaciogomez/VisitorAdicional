@@ -15,22 +15,20 @@ public class OrderManager extends JFrame {
 
     public static final String EXIT = "Exit";
     public static final String CLEAR = "Clear";
+    
+    public static final String EMPTY_ORDER = "";
     public static final String CA_ORDER = "California Order";
     public static final String COL_ORDER = "Colombian Order";
-    public static final String EMPTY_ORDER = "";
-
     public static final String NON_CA_ORDER = "Non-California Order";
-
-    //public static final String MAXIMO = "Maximum value: ";
     public static final String OVERSEAS_ORDER = "Overseas Order";
 
     private JComboBox cmbOrderType;
     private JTextField txtOrderAmount, txtId;
     private JLabel lblOrderType, lblOrderAmount;
 
-    private JLabel lblTotal, lblTotalValue, lblMaxValue;
+    private JLabel lblTotal, lblTotalValue;
 
-    private JLabel lblId, lblMaximo;
+    private JLabel lblId;
 
     private OrderVisitor objVisitor;
 

@@ -4,17 +4,21 @@ import java.util.*;
 public class AllOrders implements Iterator {
   VisitorInterface ac;
   Order nextOrder;
-  Enumeration ec;
+  Enumeration ecOrders;
 
   public AllOrders(VisitorInterface inp_ac) {
     ac = inp_ac;
-    ec = inp_ac.getAllOrders(); 
+    ecOrders = inp_ac.getAllOrders(); 
   }
+
+    public AllOrders() {
+        
+    }
   
   public boolean hasNext() {
     boolean matchFound = false;
-    while (ec.hasMoreElements()) {
-      Order tempObj = (Order) ec.nextElement();
+    while (ecOrders.hasMoreElements()) {
+      Order tempObj = (Order) ecOrders.nextElement();
         matchFound = true;
         nextOrder = tempObj;
         break;

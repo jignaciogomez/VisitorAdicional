@@ -23,7 +23,7 @@ class OrderVisitor implements VisitorInterface{
     //orderTotal = orderTotal + inp_order.getOrderAmount()+inp_order.getAdditionalTax();
       ordeObjVector.add(inp_order); 
   }
-  public void visit(SpainOrder inp_order) {
+  public void visit(ColombianOrder inp_order) {
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getSpainTax());
       //orderTotal = orderTotal + inp_order.getOrderAmount()+inp_order.getSpainTax();
       ordeObjVector.add(inp_order); 
@@ -34,6 +34,7 @@ class OrderVisitor implements VisitorInterface{
       ordeObjVector.add(inp_order); 
   }
   
+  @Override
   public boolean visitarModificando(NonCaliforniaOrder inp_order, int num) { 
       inp_order.setTotal(inp_order.getOrderAmount());
       for (int i=0;i<ordeObjVector.size();i++ ){
@@ -53,6 +54,7 @@ class OrderVisitor implements VisitorInterface{
       }
       return false; 
   }
+  @Override
   public boolean visitarModificando(CaliforniaOrder inp_order, int num) { 
         inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalTax());
         for (int i=0;i<ordeObjVector.size();i++ ){
@@ -72,6 +74,7 @@ class OrderVisitor implements VisitorInterface{
         }
         return false; 
     }
+  @Override
   public boolean visitarModificando(OverseasOrder inp_order, int num) { 
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalSH());
       for (int i=0;i<ordeObjVector.size();i++ ){
@@ -91,7 +94,8 @@ class OrderVisitor implements VisitorInterface{
       }
       return false; 
   }
-  public boolean visitarModificando(SpainOrder inp_order, int num) { 
+  @Override
+  public boolean visitarModificando(ColombianOrder inp_order, int num) { 
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getSpainTax());
       for (int i=0;i<ordeObjVector.size();i++ ){
           Order order=(Order)ordeObjVector.get(i);
@@ -110,16 +114,15 @@ class OrderVisitor implements VisitorInterface{
       }
       return false; 
   }
-  
   public double getOrderTotal() {
     double orderTotal=0; 
+    Iterator allOrdersObj = new AllOrders(this);
     
-    for (int i=0;i<ordeObjVector.size();i++){
-        Order order=(Order)ordeObjVector.get(i);
-        //Class tipo_orden=order.getClass();
-        //System.out.println("tipo de order:"+tipo_orden);
-        orderTotal=orderTotal+order.obtenerTotal();
-    }    
+    while(allOrdersObj.hasNext())
+    {
+        Order tempObj = (Order) allOrdersObj.next();
+        orderTotal=orderTotal+tempObj.obtenerTotal();
+    }  
     return orderTotal;
   }
   
