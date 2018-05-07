@@ -30,4 +30,9 @@ public class NonCaliforniaBuilder extends UIBuilder {
         //No se agregan controles adicionales ya que para NonCalifonia no aplican otros campos 
 
     }
+
+    @Override
+    public int getValorAdicional() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

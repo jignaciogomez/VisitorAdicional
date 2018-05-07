@@ -52,4 +52,9 @@ public class OverseasBuilder extends UIBuilder {
 
     }
 
+    @Override
+    public int getValorAdicional() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

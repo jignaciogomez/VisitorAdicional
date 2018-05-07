@@ -24,11 +24,7 @@ public class CaliforniaBuilder extends UIBuilder {
 
     public CaliforniaBuilder() {
     }
-    
-    public String getAdditionalTax() {
-        return txtAdditionalTax.getText();
-    }
-
+  
     public void AgregarNuevosControles() {
 
         nuevoPanel = new JPanel();
@@ -54,6 +50,11 @@ public class CaliforniaBuilder extends UIBuilder {
         gbc.gridy = 0;
         gridbag.setConstraints(txtAdditionalTax, gbc);
 
+    }
+
+    @Override
+    public int getValorAdicional() {
+        return Integer.parseInt(txtAdditionalTax.getText()) ;
     }
     
     

@@ -47,12 +47,12 @@ public class OrderManager extends JFrame {
 
         JButton changeOrderButton = new JButton(OrderManager.CHANGE_ORDER);
 
-        ButtonHandler objButtonHandler = new ButtonHandler(this);
-        getTotalButton.addActionListener(objButtonHandler);
-        createOrderButton.addActionListener(objButtonHandler);
-        exitButton.addActionListener(objButtonHandler);
-        clearButton.addActionListener(objButtonHandler);
-        changeOrderButton.addActionListener(objButtonHandler);
+        ActionHandler objActionHandler = new ActionHandler(this);
+        getTotalButton.addActionListener(objActionHandler);
+        createOrderButton.addActionListener(objActionHandler);
+        exitButton.addActionListener(objActionHandler);
+        clearButton.addActionListener(objActionHandler);
+        changeOrderButton.addActionListener(objActionHandler);
 
         //For layout purposes, put the buttons in a separate panel
         JPanel panel = new JPanel();
@@ -98,8 +98,8 @@ public class OrderManager extends JFrame {
         cmbOrderType.addItem(OrderManager.NON_CA_ORDER);
         cmbOrderType.addItem(OrderManager.OVERSEAS_ORDER);
 
-        ComboBoxHandler cbhandler2 = new ComboBoxHandler(this);
-        cmbOrderType.addItemListener(cbhandler2);
+        ActionHandler cbhandler2 = new ActionHandler(this);
+        cmbOrderType.addActionListener(cbhandler2);
 
         txtOrderAmount = new JTextField(10);
 
@@ -268,4 +268,8 @@ public class OrderManager extends JFrame {
     public String getId() {
         return txtId.getText();
     }
+    
+   public JComboBox getSearchTypeCtrl() {
+    return cmbOrderType;
+  }
 }

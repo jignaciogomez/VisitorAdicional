@@ -7,16 +7,19 @@ package Orders;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luisao
  */
-class ButtonHandler implements ActionListener {
+class ActionHandler implements ActionListener{
 
     OrderManager objOrderManager;
     static int numOrder = 0;
     UIBuilder builder;
+    
+    
 
     public void actionPerformed(ActionEvent e) {
         String totalResult = null;
@@ -26,6 +29,17 @@ class ButtonHandler implements ActionListener {
         }
         if (e.getActionCommand().equals(OrderManager.CLEAR)) {            
             objOrderManager.clear();
+        }
+        if (e.getSource() == objOrderManager.getSearchTypeCtrl()) {
+            String tipo = objOrderManager.getOrderType();
+
+            BuiderFactory factory = new BuiderFactory();
+            builder = factory.getUIBuilder(tipo);
+            UIDirector director = new UIDirector(builder);   
+            
+            director.build();
+            JPanel UIObj = builder.getNuevoPanel();
+            objOrderManager.MostarNuevaUI(UIObj);
         }
         if (e.getActionCommand().equals(OrderManager.CREATE_ORDER) || e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
             String orderType = objOrderManager.getOrderType();///
@@ -84,8 +98,7 @@ class ButtonHandler implements ActionListener {
 
         if (orderType.equalsIgnoreCase(OrderManager.CA_ORDER)) {  
             numOrder++;     
-            //String tax = CaliforniaBuilder.getAdditionalTax();tax
-            int tax =0;
+            int tax = builder.getValorAdicional();            
             return new CaliforniaOrder(orderAmount, tax, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.NON_CA_ORDER)) {
@@ -106,10 +119,10 @@ class ButtonHandler implements ActionListener {
         return null;
     }
 
-    public ButtonHandler() {
+    public ActionHandler() {
     }
 
-    public ButtonHandler(OrderManager inObjOrderManager) {
+    public ActionHandler(OrderManager inObjOrderManager) {
         objOrderManager = inObjOrderManager;
     }
 
