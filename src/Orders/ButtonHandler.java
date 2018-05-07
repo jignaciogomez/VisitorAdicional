@@ -88,7 +88,7 @@ class ButtonHandler implements ActionListener {
                     objOrderManager.setTotalValue(" The order was not found.");
                 }
             }
-            objOrderManager.setOrdenes(visitor.obtenerOrdenes());
+            //objOrderManager.setOrdenes(visitor.obtenerOrdenes());
             //objOrderManager.getTaOrdenes().setCaretPosition(objOrderManager.getTaOrdenes().getDocument().getLength() - 1);
         }
 
