@@ -57,4 +57,9 @@ public class OverseasBuilder extends UIBuilder {
        return Integer.parseInt(txtAdditionalSH.getText()) ;
     }
 
+    @Override
+   public void setValorAdicional(String Valor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

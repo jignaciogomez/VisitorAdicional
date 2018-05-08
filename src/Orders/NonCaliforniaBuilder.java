@@ -35,4 +35,9 @@ public class NonCaliforniaBuilder extends UIBuilder {
     public int getValorAdicional() {
         return 0;
     }
+
+    @Override
+    public void setValorAdicional(String Valor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

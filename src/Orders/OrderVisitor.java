@@ -124,24 +124,18 @@ class OrderVisitor implements VisitorInterface{
     return orderTotal;
   }
   
-  public String obtenerOrdenes(){
-      String cad="Num , Valor , Tipo\n";
-      for (int i=0;i<ordeObjVector.size();i++ ){
-          Order order=(Order)ordeObjVector.get(i);
-          cad=cad+order.getNum()+" , "+order.obtenerTotal()+" , "+order.getTipo()+" \n";
-      }
-      return cad;
-  }
-  
-  public Order specificOrder(String id,OrderVisitor visitor,String tipo) {
-      for (int i=0;i<ordeObjVector.size();i++ ){
-          Order order=(Order)ordeObjVector.get(i);
-          if (order.getNum()==Integer.parseInt(id) && tipo.equals(order.getClass().toString())){//hay que arreglar esto
-              return order; 
-          }
-      }
+  public Order getSpecificOrder(int numOrder){
+    Iterator allOrdersObj = new AllOrders(this);
+    
+    while(allOrdersObj.hasNext())
+    {
+        Order tempObj = (Order) allOrdersObj.next();
+        if (tempObj.getNum()==numOrder)
+        {
+            return tempObj;
+        }
+    }  
       return null;
   }
-  
   
 }

@@ -56,6 +56,11 @@ public class ColBuilder extends UIBuilder {
     public int getValorAdicional() {
         return Integer.parseInt(txtIVA.getText()) ;
     }
+
+    @Override
+    public void setValorAdicional(String Valor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
 

@@ -41,6 +41,14 @@ class ActionHandler implements ActionListener{
             JPanel UIObj = builder.getNuevoPanel();
             objOrderManager.MostarNuevaUI(UIObj);
         }
+         if (e.getActionCommand().equals(OrderManager.FIND_ORDER)) {
+             
+            OrderVisitor visitor = objOrderManager.getOrderVisitor();
+            Order objTemOrder = visitor.getSpecificOrder(Integer.parseInt(objOrderManager.getId()));
+            
+           
+            
+         }
         if (e.getActionCommand().equals(OrderManager.CREATE_ORDER) || e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
             String orderType = objOrderManager.getOrderType();///
             String strOrderAmount = objOrderManager.getOrderAmount();
