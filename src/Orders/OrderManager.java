@@ -9,7 +9,6 @@ public class OrderManager extends JFrame {
 
     public static final String GET_TOTAL = "Get Total";
     public static final String CREATE_ORDER = "Create Order";
-    //public static final String CHANGE_ORDER = "Update Order";
     public static final String FIND_ORDER = "Find Order";
     public static final String EXIT = "Exit";
     public static final String CLEAR = "Clear";
@@ -46,7 +45,6 @@ public class OrderManager extends JFrame {
 
         JButton clearButton = new JButton(OrderManager.CLEAR);
 
-        //JButton changeOrderButton = new JButton(OrderManager.CHANGE_ORDER);
         JButton findOrderButton = new JButton(OrderManager.FIND_ORDER);
 
         ActionHandler objActionHandler = new ActionHandler(this);
@@ -54,7 +52,6 @@ public class OrderManager extends JFrame {
         createOrderButton.addActionListener(objActionHandler);
         exitButton.addActionListener(objActionHandler);
         clearButton.addActionListener(objActionHandler);
-        //changeOrderButton.addActionListener(objActionHandler);
         findOrderButton.addActionListener(objActionHandler);
 
         //For layout purposes, put the buttons in a separate panel
@@ -64,11 +61,8 @@ public class OrderManager extends JFrame {
         panel.setLayout(gridbag2);
         GridBagConstraints gbc2 = new GridBagConstraints();
 
-        //gbc2.insets.top = 50;
         gbc2.insets.bottom = 20;
-        //gbc2.insets.left = 50;
-        //gbc2.insets.right = 50;
-
+        
         panel.add(getTotalButton);
         panel.add(createOrderButton);
         panel.add(clearButton);
@@ -100,7 +94,6 @@ public class OrderManager extends JFrame {
         cmbOrderType.addItem(OrderManager.NON_CA_ORDER);
         cmbOrderType.addItem(OrderManager.OVERSEAS_ORDER);
 
-        //ActionHandler cbhandler2 = new ActionHandler(this);
         cmbOrderType.addActionListener(objActionHandler);
 
         txtOrderAmount = new JTextField(10);
@@ -185,7 +178,6 @@ public class OrderManager extends JFrame {
         CenterPanel.add(txtId);
         CenterPanel.add(lblId);
         CenterPanel.add(lblResultOrder);
-        //CenterPanel.add(changeOrderButton);
         CenterPanel.add(findOrderButton);
 
         gbc3.anchor = GridBagConstraints.WEST;
@@ -208,10 +200,6 @@ public class OrderManager extends JFrame {
         gbc3.gridy = 3;
         gridbagC.setConstraints(findOrderButton, gbc3);
 
-//        gbc3.anchor = GridBagConstraints.EAST;
-//        gbc3.gridx = 1;
-//        gbc3.gridy = 3;
-//        gridbagC.setConstraints(changeOrderButton, gbc3);
         gbc3.anchor = GridBagConstraints.EAST;
         gbc3.gridx = 0;
         gbc3.gridy = 4;

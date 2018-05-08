@@ -75,23 +75,6 @@ class ActionHandler implements ActionListener {
 
                 objOrderManager.setTotalValue("Orden Creada con el Id: " + String.valueOf(numOrder));
             }
-
-//            if (e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
-//                String strId = objOrderManager.getId();
-//                if (strId.trim().length() == 0) {
-//                    strId = "0";
-//                }
-//                Order newOrder = createOrder(orderType, dblOrderAmount);///  
-//
-//                //Order order = visitor.specificOrder(strId, visitor,orderType );  
-//                boolean updated = newOrder.aceptarModificacion(visitor, Integer.parseInt(strId));//  
-//
-//                if (updated) {
-//                    objOrderManager.setTotalValue(" The list was updated.");
-//                } else {
-//                    objOrderManager.setTotalValue(" The order was not found.");
-//                }
-//            }
         }
 
         if (e.getActionCommand().equals(OrderManager.GET_TOTAL)) {

@@ -18,8 +18,7 @@ class OrderVisitor implements VisitorInterface{
     ordeObjVector.add(inp_order); 
   }
   public void visit(CaliforniaOrder inp_order) {
-      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalTax());//si se quitara esta línea no tendría gracia visitar la clase hija en vez de la clase abstracta (o interfaz)
-    //orderTotal = orderTotal + inp_order.getOrderAmount()+inp_order.getAdditionalTax();
+      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalTax());
       ordeObjVector.add(inp_order); 
   }
   public void visit(ColombianOrder inp_order) {
@@ -28,90 +27,9 @@ class OrderVisitor implements VisitorInterface{
   }
   public void visit(OverseasOrder inp_order) {
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalSH());
-    //orderTotal = orderTotal + inp_order.getOrderAmount()+inp_order.getAdditionalSH();
       ordeObjVector.add(inp_order); 
   }
   
-//  @Override
-//  public boolean visitarModificando(NonCaliforniaOrder inp_order, int num) { 
-//      inp_order.setTotal(inp_order.getOrderAmount());
-//      for (int i=0;i<ordeObjVector.size();i++ ){
-//          Order order=(Order)ordeObjVector.get(i);
-//          if (order.getNum()==num){
-//              if(inp_order.obtenerTotal()!=0){
-//                inp_order.setNum(num);
-//                System.out.println("Se va a modificar la orden "+i);
-//                //order.setTotal(((NonCaliforniaOrder)o2).getOrderAmount());              
-//                ordeObjVector.set(i, inp_order);
-//                return true;
-//              }else{
-//                    ordeObjVector.remove(i);
-//                    return true; 
-//              }
-//          }
-//      }
-//      return false; 
-//  }
-//  @Override
-//  public boolean visitarModificando(CaliforniaOrder inp_order, int num) { 
-//        inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalTax());
-//        for (int i=0;i<ordeObjVector.size();i++ ){
-//          Order order=(Order)ordeObjVector.get(i);
-//            if (order.getNum()==num){              
-//                if(inp_order.obtenerTotal()!=0){
-//                    inp_order.setNum(num);
-//                    //order.setTotal(((CaliforniaOrder)o2).getOrderAmount()+((CaliforniaOrder)o2).getAdditionalTax());              
-//                    System.out.println("Se va a modificar la orden "+i);
-//                    ordeObjVector.set(i, inp_order);
-//                    return true; 
-//                }else{
-//                    ordeObjVector.remove(i);
-//                    return true; 
-//                }
-//            }
-//        }
-//        return false; 
-//    }
-//  @Override
-//  public boolean visitarModificando(OverseasOrder inp_order, int num) { 
-//      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalSH());
-//      for (int i=0;i<ordeObjVector.size();i++ ){
-//          Order order=(Order)ordeObjVector.get(i);
-//          if (order.getNum()==num){
-//              if(inp_order.obtenerTotal()!=0){              
-//                inp_order.setNum(num);
-//                //order.setTotal(((CaliforniaOrder)o2).getOrderAmount()+((CaliforniaOrder)o2).getAdditionalTax());  
-//                System.out.println("Se va a modificar la orden "+i);
-//                ordeObjVector.set(i, inp_order);
-//                return true; 
-//              }else{
-//                ordeObjVector.remove(i);
-//                return true; 
-//            }
-//          }
-//      }
-//      return false; 
-//  }
-//  @Override
-//  public boolean visitarModificando(ColombianOrder inp_order, int num) { 
-//      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getIvaTax());
-//      for (int i=0;i<ordeObjVector.size();i++ ){
-//          Order order=(Order)ordeObjVector.get(i);
-//          if (order.getNum()==num){
-//              if(inp_order.obtenerTotal()!=0){              
-//                inp_order.setNum(num);
-//                //order.setTotal(((CaliforniaOrder)o2).getOrderAmount()+((CaliforniaOrder)o2).getAdditionalTax());  
-//                System.out.println("Se va a modificar la orden "+i);
-//                ordeObjVector.set(i, inp_order);
-//                return true; 
-//              }else{
-//                ordeObjVector.remove(i);
-//                return true;  
-//              }
-//          }
-//      }
-//      return false; 
-//  }
   public double getOrderTotal() {
     double orderTotal=0; 
     Iterator allOrdersObj = new AllOrders(this);
