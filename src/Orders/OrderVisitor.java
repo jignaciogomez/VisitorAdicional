@@ -13,21 +13,22 @@ class OrderVisitor implements VisitorInterface{
   public OrderVisitor() {
     ordeObjVector = new Vector();
   }
+ 
   public void visit(NonCaliforniaOrder inp_order) {
     inp_order.setTotal(inp_order.getOrderAmount());
-    ordeObjVector.add(inp_order); 
+     ordeObjVector.add(inp_order);
   }
   public void visit(CaliforniaOrder inp_order) {
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalTax());
-      ordeObjVector.add(inp_order); 
+      ordeObjVector.add(inp_order);
   }
   public void visit(ColombianOrder inp_order) {
-      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getIvaTax());
-      ordeObjVector.add(inp_order); 
+      inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getIvaTax()); 
+      ordeObjVector.add(inp_order);
   }
   public void visit(OverseasOrder inp_order) {
       inp_order.setTotal(inp_order.getOrderAmount()+inp_order.getAdditionalSH());
-      ordeObjVector.add(inp_order); 
+      ordeObjVector.add(inp_order);
   }
   
   public double getOrderTotal() {

@@ -70,10 +70,9 @@ class ActionHandler implements ActionListener {
                 ////Create the order
                 Order order = createOrder(orderType, dblOrderAmount);///            
 
-                //// accept the visitor instance
-                order.accept(visitor);//
-
-                objOrderManager.setTotalValue("Orden Creada con el Id: " + String.valueOf(numOrder));
+                //Add Orders to Vector
+                order.accept(visitor);
+                objOrderManager.setTotalValue("created successfully with Id: " + String.valueOf(numOrder));
             }
         }
 
