@@ -98,8 +98,8 @@ public class OrderManager extends JFrame {
         cmbOrderType.addItem(OrderManager.NON_CA_ORDER);
         cmbOrderType.addItem(OrderManager.OVERSEAS_ORDER);
 
-        ActionHandler cbhandler2 = new ActionHandler(this);
-        cmbOrderType.addActionListener(cbhandler2);
+        //ActionHandler cbhandler2 = new ActionHandler(this);
+        cmbOrderType.addActionListener(objActionHandler);
 
         txtOrderAmount = new JTextField(10);
 

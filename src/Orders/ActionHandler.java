@@ -106,13 +106,13 @@ class ActionHandler implements ActionListener{
             return new NonCaliforniaOrder(orderAmount, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.OVERSEAS_ORDER)) {
-            numOrder++;
-            int SH = 0;
+            numOrder++;            
+            int SH = builder.getValorAdicional();            
             return new OverseasOrder(orderAmount, SH, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.COL_ORDER)) {
             numOrder++;
-            int IVATax = 0;
+            int IVATax = builder.getValorAdicional(); 
             return new ColombianOrder(orderAmount, IVATax, numOrder);
         }
 
