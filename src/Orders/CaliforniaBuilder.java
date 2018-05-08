@@ -56,11 +56,6 @@ public class CaliforniaBuilder extends UIBuilder {
     public int getValorAdicional() {
         return Integer.parseInt(txtAdditionalTax.getText()) ;
     }
-
-    @Override
-    public void setValorAdicional(String Valor) {
-        txtAdditionalTax.setText(Valor);
-    }
     
     
 }

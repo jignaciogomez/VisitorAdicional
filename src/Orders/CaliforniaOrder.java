@@ -30,10 +30,10 @@ public class CaliforniaOrder extends Order {
     v.visit(this);
   }
   
-  @Override
-  public boolean  aceptarModificacion(OrderVisitor v, int num) {
-    return v.visitarModificando(this,num); 
-  }
+//  @Override
+//  public boolean  aceptarModificacion(OrderVisitor v, int num) {
+//    return v.visitarModificando(this,num); 
+//  }
   
   @Override
   public double obtenerTotal(){

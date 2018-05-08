@@ -28,10 +28,10 @@ public class OverseasOrder extends Order {
   public void accept(OrderVisitor v) {
     v.visit(this);
   }
-  @Override
-  public boolean  aceptarModificacion(OrderVisitor v, int num) {
-    return v.visitarModificando(this,num); 
-  }
+//  @Override
+//  public boolean  aceptarModificacion(OrderVisitor v, int num) {
+//    return v.visitarModificando(this,num); 
+//  }
   @Override
   public double obtenerTotal(){
     System.out.println("El total de esta orden de tipo Overseas es "+orderAmount+" + "+additionalSH+" = "+(orderAmount+additionalSH));

@@ -7,7 +7,7 @@ public abstract class Order {
 
   public abstract void accept(OrderVisitor v);
   
-  public abstract boolean aceptarModificacion(OrderVisitor v, int num);          
+ // public abstract boolean aceptarModificacion(OrderVisitor v, int num);          
           
   public abstract double obtenerTotal();
   

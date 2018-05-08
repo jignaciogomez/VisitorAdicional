@@ -19,9 +19,9 @@ public class NonCaliforniaOrder extends Order {
   public void accept(OrderVisitor v) {
     v.visit(this);
   }
-  public boolean  aceptarModificacion(OrderVisitor v, int num) {
-    return v.visitarModificando(this,num); 
-  }
+//  public boolean  aceptarModificacion(OrderVisitor v, int num) {
+//    return v.visitarModificando(this,num); 
+//  }
   public double obtenerTotal(){
     System.out.println("El total de esta orden de tipo NonCalifornia es "+orderAmount);
     //return orderAmount;

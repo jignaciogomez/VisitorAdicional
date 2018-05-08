@@ -18,7 +18,6 @@ public abstract class UIBuilder {
 
 	public abstract void AgregarNuevosControles();
         public abstract int getValorAdicional();
-        public abstract void setValorAdicional(String valor);
 	        
         public JPanel getNuevoPanel(){
             return nuevoPanel;

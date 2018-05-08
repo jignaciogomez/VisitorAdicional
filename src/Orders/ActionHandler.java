@@ -13,21 +13,19 @@ import javax.swing.JPanel;
  *
  * @author Luisao
  */
-class ActionHandler implements ActionListener{
+class ActionHandler implements ActionListener {
 
     OrderManager objOrderManager;
     static int numOrder = 0;
     UIBuilder builder;
-    
-    
 
     public void actionPerformed(ActionEvent e) {
         String totalResult = null;
 
-        if (e.getActionCommand().equals(OrderManager.EXIT)) {           
+        if (e.getActionCommand().equals(OrderManager.EXIT)) {
             System.exit(1);
         }
-        if (e.getActionCommand().equals(OrderManager.CLEAR)) {            
+        if (e.getActionCommand().equals(OrderManager.CLEAR)) {
             objOrderManager.clear();
         }
         if (e.getSource() == objOrderManager.getSearchTypeCtrl()) {
@@ -35,21 +33,25 @@ class ActionHandler implements ActionListener{
 
             BuiderFactory factory = new BuiderFactory();
             builder = factory.getUIBuilder(tipo);
-            UIDirector director = new UIDirector(builder);   
-            
+            UIDirector director = new UIDirector(builder);
+
             director.build();
             JPanel UIObj = builder.getNuevoPanel();
             objOrderManager.MostarNuevaUI(UIObj);
         }
-         if (e.getActionCommand().equals(OrderManager.FIND_ORDER)) {
-             
+        if (e.getActionCommand().equals(OrderManager.FIND_ORDER)) {
+
             OrderVisitor visitor = objOrderManager.getOrderVisitor();
             Order objTemOrder = visitor.getSpecificOrder(Integer.parseInt(objOrderManager.getId()));
-            
-           
-            
-         }
-        if (e.getActionCommand().equals(OrderManager.CREATE_ORDER) || e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
+            if (objTemOrder == null) {
+                objOrderManager.setResultOrder("order not found");
+            } else {
+
+                objOrderManager.setResultOrder("Result: Type= " + objTemOrder.getTipo() + " Total= " + objTemOrder.obtenerTotal());
+            }
+        }
+        if (e.getActionCommand().equals(OrderManager.CREATE_ORDER)) // || e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
+        {
             String orderType = objOrderManager.getOrderType();///
             String strOrderAmount = objOrderManager.getOrderAmount();
 
@@ -74,22 +76,22 @@ class ActionHandler implements ActionListener{
                 objOrderManager.setTotalValue("Orden Creada con el Id: " + String.valueOf(numOrder));
             }
 
-            if (e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
-                String strId = objOrderManager.getId();
-                if (strId.trim().length() == 0) {
-                    strId = "0";
-                }
-                Order newOrder = createOrder(orderType, dblOrderAmount);///  
-                
-                //Order order = visitor.specificOrder(strId, visitor,orderType );  
-                 boolean updated = newOrder.aceptarModificacion(visitor, Integer.parseInt(strId));//  
-
-                if (updated) {
-                    objOrderManager.setTotalValue(" The list was updated.");
-                } else {
-                    objOrderManager.setTotalValue(" The order was not found.");
-                }
-            }
+//            if (e.getActionCommand().equals(OrderManager.CHANGE_ORDER)) {
+//                String strId = objOrderManager.getId();
+//                if (strId.trim().length() == 0) {
+//                    strId = "0";
+//                }
+//                Order newOrder = createOrder(orderType, dblOrderAmount);///  
+//
+//                //Order order = visitor.specificOrder(strId, visitor,orderType );  
+//                boolean updated = newOrder.aceptarModificacion(visitor, Integer.parseInt(strId));//  
+//
+//                if (updated) {
+//                    objOrderManager.setTotalValue(" The list was updated.");
+//                } else {
+//                    objOrderManager.setTotalValue(" The order was not found.");
+//                }
+//            }
         }
 
         if (e.getActionCommand().equals(OrderManager.GET_TOTAL)) {
@@ -104,9 +106,9 @@ class ActionHandler implements ActionListener{
 
     public Order createOrder(String orderType, double orderAmount) {
 
-        if (orderType.equalsIgnoreCase(OrderManager.CA_ORDER)) {  
-            numOrder++;     
-            int tax = builder.getValorAdicional();            
+        if (orderType.equalsIgnoreCase(OrderManager.CA_ORDER)) {
+            numOrder++;
+            int tax = builder.getValorAdicional();
             return new CaliforniaOrder(orderAmount, tax, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.NON_CA_ORDER)) {
@@ -114,13 +116,13 @@ class ActionHandler implements ActionListener{
             return new NonCaliforniaOrder(orderAmount, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.OVERSEAS_ORDER)) {
-            numOrder++;            
-            int SH = builder.getValorAdicional();            
+            numOrder++;
+            int SH = builder.getValorAdicional();
             return new OverseasOrder(orderAmount, SH, numOrder);
         }
         if (orderType.equalsIgnoreCase(OrderManager.COL_ORDER)) {
             numOrder++;
-            int IVATax = builder.getValorAdicional(); 
+            int IVATax = builder.getValorAdicional();
             return new ColombianOrder(orderAmount, IVATax, numOrder);
         }
 
