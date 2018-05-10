@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 class ActionHandler implements ActionListener {
 
     OrderManager objOrderManager;
-    static int numOrder = 0;
+    private int numOrder = 0;
     UIBuilder builder;
 
     public void actionPerformed(ActionEvent e) {
@@ -46,7 +46,6 @@ class ActionHandler implements ActionListener {
             if (objTemOrder == null) {
                 objOrderManager.setResultOrder("order not found");
             } else {
-
                 objOrderManager.setResultOrder("Result: Type= " + objTemOrder.getTipo() + " Total= " + objTemOrder.obtenerTotal());
             }
         }
@@ -63,17 +62,15 @@ class ActionHandler implements ActionListener {
 
             dblOrderAmount = Double.parseDouble(strOrderAmount);
 
-            ////Get the Visitor  
-            OrderVisitor visitor = objOrderManager.getOrderVisitor();//
+            //Get the Visitor  
+            OrderVisitor visitor = objOrderManager.getOrderVisitor();
 
-            if (e.getActionCommand().equals(OrderManager.CREATE_ORDER)) {
-                ////Create the order
-                Order order = createOrder(orderType, dblOrderAmount);///            
+            //Create the order
+            Order order = createOrder(orderType, dblOrderAmount);
 
-                //Add Orders to Vector
-                order.accept(visitor);
-                objOrderManager.setTotalValue("created successfully with Id: " + String.valueOf(numOrder));
-            }
+            //Add Orders to Vector
+            order.accept(visitor);
+            objOrderManager.setTotalValue("created successfully with Id: " + String.valueOf(numOrder));
         }
 
         if (e.getActionCommand().equals(OrderManager.GET_TOTAL)) {

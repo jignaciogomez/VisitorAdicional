@@ -30,7 +30,6 @@ public class CaliforniaOrder extends Order {
     v.visit(this);
   }
   
-
   @Override
   public double obtenerTotal(){
     return this.total; 

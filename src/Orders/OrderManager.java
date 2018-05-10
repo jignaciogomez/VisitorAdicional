@@ -36,9 +36,9 @@ public class OrderManager extends JFrame {
         ///INI-PANEL DE BOTONES///
         JButton getTotalButton = new JButton(OrderManager.GET_TOTAL);
         getTotalButton.setMnemonic(KeyEvent.VK_G);
-        getTotalButton.setMnemonic(KeyEvent.VK_C);
-
+        
         JButton createOrderButton = new JButton(OrderManager.CREATE_ORDER);
+        createOrderButton.setMnemonic(KeyEvent.VK_C);
 
         JButton exitButton = new JButton(OrderManager.EXIT);
         exitButton.setMnemonic(KeyEvent.VK_X);
@@ -80,7 +80,6 @@ public class OrderManager extends JFrame {
         gbc2.gridx = 3;
         gbc2.gridy = 0;
         gridbag2.setConstraints(exitButton, gbc2);
-
         gbc2.gridx = 4;
         gbc2.gridy = 0;
         gridbag2.setConstraints(clearButton, gbc2);
@@ -112,12 +111,9 @@ public class OrderManager extends JFrame {
 
         buttonPanel.add(lblOrderType);
         buttonPanel.add(cmbOrderType);
-
         buttonPanel.add(lblOrderAmount);
         buttonPanel.add(txtOrderAmount);
-
         buttonPanel.add(paneldinamico);
-
         buttonPanel.add(lblTotal);
         buttonPanel.add(lblTotalValue);
 
@@ -171,7 +167,7 @@ public class OrderManager extends JFrame {
 
         lblId = new JLabel("ID order to find:");
         lblResultOrder = new JLabel("Result: Order Specific");
-        lblInfoBuscar = new JLabel("Buscar:");
+        lblInfoBuscar = new JLabel("Search:");
         txtId = new JTextField(10);
 
         CenterPanel.add(lblInfoBuscar);
@@ -222,7 +218,6 @@ public class OrderManager extends JFrame {
     }
 
     public void clear() {
-        System.out.println("antes de borrar");
         txtOrderAmount.setText("");
         txtId.setText("");
         paneldinamico.removeAll();
